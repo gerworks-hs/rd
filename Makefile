@@ -2,8 +2,9 @@ CC ?= gcc
 CCFLAGS = -Wall -o ./rd
 
 dev:
-	$(CC) $(CCFLAGS) ./src/main.c
+	$(CC) $(CCFLAGS) -g ./src/main.c
 release:
-	$(CC) $(CCFLAGS) -strip -O3 ./src/main.c
+	$(CC) $(CCFLAGS) -O3 ./src/main.c
+	strip --strip-all ./rd
 clean:
 	rm -rfv ./rd
