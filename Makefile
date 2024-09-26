@@ -1,14 +1,14 @@
 CC ?= gcc
 WINCC = x86_64-w64-mingw32-gcc
-CCFLAGS = -Wall -o ./rd
+STRIP = strip --strip-all
 
-dev:
-	$(CC) $(CCFLAGS) -g ./src/main.c
+debug:
+	$(CC) $(CCFLAGS) -Wall -o ./rd.elf -g ./src/main.c
 release-gnu-linux:
-	$(CC) $(CCFLAGS) -O3 ./src/main.c
-	strip --strip-all ./rd
+	$(CC) $(CCFLAGS) -Wall -o ./rd.elf -O3 ./src/main.c
+	$(STRIP) ./rd.elf
 release-windows:
-	$(WINCC) $(CCFLAGS) -O3 ./src/main.c
-	strip --strip-all ./rd
+	$(WINCC) $(CCFLAGS) -Wall -o ./rd.exe -O3 ./src/main.c
+	$(STRIP) ./rd.exe
 clean:
-	rm -rfv ./rd
+	rm -rfv ./rd.elf ./rd.exe
