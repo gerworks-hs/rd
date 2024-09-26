@@ -30,20 +30,24 @@ int main(int argc, char **argv) {
 	fprintf(stdout, "rd - %s\n", VERSION);
 	fprintf(stdout, "Made by Gerworks-HS (itsgerliz)\n\n");
 
-	if (argc != 2) {
-		fprintf(stderr, "Usage: %s <file path>\n", argv[0]);
+	if (argc < 2) {
+		fprintf(stderr, "Usage: %s <file paths> ...\n", argv[0]);
 		exit(EXIT_FAILURE);
 	}
 
-	int file_fd = open(argv[1], O_RDONLY);
+	for (int i = 1; i < argc; i++) {
+		int file_fd = open(argv[i], O_RDONLY);
 
-	if (file_fd < 0) {
-		fprintf(stderr, "Cannot open <%s>\n", argv[1]);
-		perror("open()");
-		exit(EXIT_FAILURE);
+		if (file_fd < 0) {
+			fprintf(stderr, "Cannot open <%s>\n", argv[i]);
+			perror("open()");
+			continue;
+		}
+
+		fprintf(stdout, "Reading file <%s>\n\n", argv[i]);
+
+		read_file(file_fd);
 	}
-
-	read_file(file_fd);
 
 	exit(EXIT_SUCCESS);
 }
