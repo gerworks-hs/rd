@@ -27,6 +27,9 @@ void read_file(int fd) {
 }
 
 int main(int argc, char **argv) {
+	fprintf(stdout, "rd - %s\n", VERSION);
+	fprintf(stdout, "Made by Gerworks-HS (itsgerliz)\n\n");
+
 	if (argc != 2) {
 		fprintf(stderr, "Usage: %s <file path>\n", argv[0]);
 		exit(EXIT_FAILURE);
